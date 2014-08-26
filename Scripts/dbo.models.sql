@@ -1,0 +1,17 @@
+﻿CREATE TABLE [dbo].[Team]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+    [Name] NVARCHAR(32) NOT NULL,
+    [Avatar] NVARCHAR(128) NULL
+)
+
+CREATE TABLE [dbo].[Player]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+	[TeamId] INT NULL REFERENCES [Team]([Id]),
+    [Name] NVARCHAR(32) NOT NULL,
+    [Avatar] NVARCHAR(128) NULL,
+    [Win] TINYINT NULL,
+    [Loss] TINYINT NULL,
+    [Tie] TINYINT NULL
+)
