@@ -99,11 +99,11 @@ namespace TeamManager.Models
 		
 		private string _Avatar;
 		
-		private System.Nullable<byte> _Win;
+		private int _Win;
 		
-		private System.Nullable<byte> _Loss;
+		private int _Loss;
 		
-		private System.Nullable<byte> _Tie;
+		private int _Tie;
 		
 		private EntityRef<Team> _Team;
 		
@@ -119,11 +119,11 @@ namespace TeamManager.Models
     partial void OnNameChanged();
     partial void OnAvatarChanging(string value);
     partial void OnAvatarChanged();
-    partial void OnWinChanging(System.Nullable<byte> value);
+    partial void OnWinChanging(int value);
     partial void OnWinChanged();
-    partial void OnLossChanging(System.Nullable<byte> value);
+    partial void OnLossChanging(int value);
     partial void OnLossChanged();
-    partial void OnTieChanging(System.Nullable<byte> value);
+    partial void OnTieChanging(int value);
     partial void OnTieChanged();
     #endregion
 		
@@ -133,7 +133,7 @@ namespace TeamManager.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -217,8 +217,8 @@ namespace TeamManager.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Win", DbType="TinyInt")]
-		public System.Nullable<byte> Win
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Win", DbType="Int NOT NULL")]
+		public int Win
 		{
 			get
 			{
@@ -237,8 +237,8 @@ namespace TeamManager.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loss", DbType="TinyInt")]
-		public System.Nullable<byte> Loss
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loss", DbType="Int NOT NULL")]
+		public int Loss
 		{
 			get
 			{
@@ -257,8 +257,8 @@ namespace TeamManager.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tie", DbType="TinyInt")]
-		public System.Nullable<byte> Tie
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tie", DbType="Int NOT NULL")]
+		public int Tie
 		{
 			get
 			{
@@ -364,7 +364,7 @@ namespace TeamManager.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get

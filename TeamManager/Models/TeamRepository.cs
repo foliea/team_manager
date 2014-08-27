@@ -39,10 +39,21 @@ namespace TeamManager.Models
             {
                 Id = teamId,
                 Name = team.Name,
-                Avatar = team.Avatar
+                Avatar = team.Avatar,
+                Players = team.Player.Select(player => new PlayerModel()
+                {
+                    Id = player.Id,
+                    TeamId = player.TeamId,
+                    Name = player.Name,
+                    Avatar = player.Avatar,
+                    Win = player.Win,
+                    Loss = player.Loss,
+                    Tie = player.Tie
+                })
             };
             return model;
         }
+
         public void InsertTeam(TeamModel team)
         {
             var teamData = new Team()
@@ -53,6 +64,7 @@ namespace TeamManager.Models
             _dataContext.Team.InsertOnSubmit(teamData);
             _dataContext.SubmitChanges();
         }
+        
         public void DeleteTeam(int teamId)
         {
             Team team = _dataContext.Team.Where(u => u.Id == teamId).SingleOrDefault();
@@ -63,7 +75,6 @@ namespace TeamManager.Models
         {
             Team teamData = _dataContext.Team.Where(u => u.Id == team.Id).SingleOrDefault();
             teamData.Name = team.Name;
-            teamData.Avatar = team.Avatar = team.Avatar = team.Avatar;
             teamData.Avatar = team.Avatar;
             _dataContext.SubmitChanges();
         }

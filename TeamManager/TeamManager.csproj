@@ -127,17 +127,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\ValidateImage.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IPlayerRepository.cs" />
     <Compile Include="Models\ITeamRepository.cs" />
+    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\TeamManager.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TeamManager.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\TeamModel.cs" />
+    <Compile Include="Models\PlayerRepository.cs" />
     <Compile Include="Models\TeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,6 +151,7 @@
     <Content Include="App_Data\TeamManager_log.ldf">
       <DependentUpon>TeamManager.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Avatars\empty.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -239,12 +245,24 @@
     <Content Include="Views\Team\Edit.cshtml" />
     <Content Include="Views\Team\Details.cshtml" />
     <Content Include="Views\Team\Delete.cshtml" />
+    <Content Include="Views\Player\Create.cshtml" />
+    <Content Include="Views\Player\Delete.cshtml" />
+    <Content Include="Views\Player\Details.cshtml" />
+    <Content Include="Views\Player\Edit.cshtml" />
+    <Content Include="Views\Player\Index.cshtml" />
+    <Content Include="Views\Shared\_PlayerList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\Avatars\Players\" />
+    <Folder Include="App_Data\Avatars\Teams\" />
+    <Folder Include="Content\Avatars\Players\" />
+    <Folder Include="Content\Avatars\Teams\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\TeamManager.dbml.layout">

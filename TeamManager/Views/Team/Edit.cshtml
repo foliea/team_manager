@@ -3,11 +3,11 @@
     ViewBag.Title = "Edit";
 }
 <h2>Edit</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>UserModel</legend>
+        <legend>TeamModel</legend>
         @Html.HiddenFor(model => model.Id)
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -19,9 +19,19 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Avatar)
         </div>
+        <div class="display-field">
+            @if (String.IsNullOrEmpty(Model.Avatar))
+            {
+                <img src="@Url.Content("~/Content/Avatars/Teams/empty.png")" alt="Image" />
+            }
+            else
+            {
+                <img src="@Url.Content(String.Format("~/Content/Avatars/Teams/{0}", Model.Avatar))" alt="Image" />
+            }
+        </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Avatar)
-            @Html.ValidationMessageFor(model => model.Avatar)
+            @Html.TextBoxFor(model => model.AvatarImage, new { type = "file", accept = "image/*" })
+            @Html.ValidationMessageFor(model => model.AvatarImage)
         </div>
         <p>
             <input type="submit" value="Save" />

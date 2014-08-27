@@ -2,23 +2,23 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TeamManager">
   <DataContextMoniker Name="/TeamManagerDataContext" />
   <nestedChildShapes>
-    <classShape Id="6d376cb1-7100-4820-8ff8-4d194a81b6d4" absoluteBounds="1.5, 4.5, 2, 2.1554996744791666">
+    <classShape Id="8e4d0dee-731c-4a02-b0f4-2eab3ed6d180" absoluteBounds="1.375, 4.625, 2, 2.1554996744791666">
       <DataClassMoniker Name="/TeamManagerDataContext/Player" />
       <nestedChildShapes>
-        <elementListCompartment Id="a68cdb9c-64f0-45d5-adc9-2c2073cf3768" absoluteBounds="1.5150000000000001, 4.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f6032d85-59a1-4c9f-91d9-35a4c7fc3d75" absoluteBounds="1.3900000000000001, 5.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bd8856e0-f01e-4040-9c95-4d54bc69c3de" absoluteBounds="4.375, 4, 2, 1.3862939453125">
+    <classShape Id="c157bf1d-3c70-435e-9554-7f0f578efa7a" absoluteBounds="5.5, 4, 2, 1.3862939453125">
       <DataClassMoniker Name="/TeamManagerDataContext/Team" />
       <nestedChildShapes>
-        <elementListCompartment Id="fea4e903-53de-40ad-806a-d4ce4cbc8231" absoluteBounds="4.39, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6c761b45-92cd-4766-9054-180b40ab0f8e" absoluteBounds="5.515, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.375 : 4.94314697265625); (3.5 : 4.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 5.00564697265625); (3.375 : 5.00564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/TeamManagerDataContext/Team/Team_Player" />
       <nodes>
-        <classShapeMoniker Id="bd8856e0-f01e-4040-9c95-4d54bc69c3de" />
-        <classShapeMoniker Id="6d376cb1-7100-4820-8ff8-4d194a81b6d4" />
+        <classShapeMoniker Id="c157bf1d-3c70-435e-9554-7f0f578efa7a" />
+        <classShapeMoniker Id="8e4d0dee-731c-4a02-b0f4-2eab3ed6d180" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

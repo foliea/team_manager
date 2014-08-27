@@ -1,11 +1,11 @@
-﻿@model TeamManager.Models.TeamModel
+﻿@model TeamManager.Models.PlayerModel
 @{
     ViewBag.Title = "Delete";
 }
 <h2>Delete</h2>
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>TeamModel</legend>
+    <legend>PlayerModel</legend>
     <div class="display-label">
         @Html.DisplayNameFor(model => model.Name)
     </div>
@@ -18,12 +18,21 @@
     <div class="display-field">
         @if (String.IsNullOrEmpty(Model.Avatar))
         {
-            <img src="@Url.Content("~/Content/Avatars/Teams/empty.png")" alt="Image" />
+            <img src="@Url.Content("~/Content/Avatars/Players/empty.png")" alt="Image" />
         }
         else
         {
-            <img src="@Url.Content(String.Format("~/Content/Avatars/Teams/{0}", Model.Avatar))" alt="Image" />
+            <img src="@Url.Content(String.Format("~/Content/Avatars/Players/{0}", Model.Avatar))" alt="Image" />
         }
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Win)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Loss)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tie)
     </div>
 </fieldset>
 @using (Html.BeginForm())

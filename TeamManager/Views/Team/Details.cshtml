@@ -4,7 +4,7 @@
 }
 <h2>Details</h2>
 <fieldset>
-    <legend>UserModel</legend>
+    <legend>TeamModel</legend>
     <div class="display-label">
         @Html.DisplayNameFor(model => model.Name)
     </div>
@@ -15,9 +15,21 @@
         @Html.DisplayNameFor(model => model.Avatar)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Avatar)
+        @if (String.IsNullOrEmpty(Model.Avatar))
+        {
+            <img src="@Url.Content("~/Content/Avatars/Teams/empty.png")" alt="Image" />
+        }
+        else
+        {
+            <img src="@Url.Content(String.Format("~/Content/Avatars/Teams/{0}", Model.Avatar))" alt="Image" />
+        }
     </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Players)
+    </div>
+    @{Html.RenderPartial("_PlayerList", Model.Players);}
 </fieldset>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

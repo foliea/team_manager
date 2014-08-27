@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using TeamManager.Common;
+using System.Web.DynamicData;
+using System.ComponentModel.DataAnnotations;
 
 namespace TeamManager.Models
 {
-    public class TeamModel
+    public class PlayerModel
     {
         public int Id { get; set; }
+
+        public int? TeamId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -17,7 +20,14 @@ namespace TeamManager.Models
         [StringLength(100, ErrorMessage = "Image name cannot be longer than 100 characters.")]
         public string Avatar { get; set; }
 
-        public IEnumerable<PlayerModel> Players { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Win number must be a positive number")]
+        public int Win { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Loss number must be a positive number")]
+        public int Loss { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Tie number must be a positive number")]
+        public int Tie { get; set; }
 
         [ValidateImage(ErrorMessage = "Please select a PNG or JPEG image smaller than 1MB")]
         public HttpPostedFileBase AvatarImage { get; set; }

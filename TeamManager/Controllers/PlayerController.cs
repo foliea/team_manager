@@ -9,43 +9,44 @@ using TeamManager.Models;
 
 namespace TeamManager.Controllers
 {
-    public class TeamController : Controller
+    public class PlayerController : Controller
     {
-        private ITeamRepository _repository;
+        private IPlayerRepository _repository;
 
-        public TeamController(ITeamRepository repository)
+        public PlayerController(IPlayerRepository repository)
         {
             _repository = repository;
         }
-        public TeamController()
-            : this(new TeamRepository())
+        public PlayerController()
+            : this(new PlayerRepository())
         {
         }
 
         public ActionResult Index()
         {
-            var teams = _repository.GetTeams();
-            return View(teams);
+            var players = _repository.GetPlayers();
+            return View(players);
         }
 
         public ActionResult Create()
         {
-            return View(new TeamModel());
+            return View(new PlayerModel());
         }
 
         [HttpPost]
-        public ActionResult Create(TeamModel team)
+        public ActionResult Create(PlayerModel player)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (team.AvatarImage != null && team.AvatarImage.ContentLength > 0) {
-                        team.Avatar = String.Format("{0}_{1}", team.Id, Path.GetFileName(team.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
-                        team.AvatarImage.SaveAs(filepath);
+                    if (player.AvatarImage != null && player.AvatarImage.ContentLength > 0)
+                    {
+                        player.Avatar = String.Format("{0}_{1}", player.Id, Path.GetFileName(player.AvatarImage.FileName));
+                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
+                        player.AvatarImage.SaveAs(filepath);
                     }
-                    _repository.InsertTeam(team);
+                    _repository.InsertPlayer(player);
                     return RedirectToAction("Index");
                 }
             }
@@ -53,45 +54,45 @@ namespace TeamManager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            return View(team);
+            return View(player);
         }
 
         public ActionResult Details(int id)
         {
-            TeamModel model = _repository.GetTeamById(id);
+            PlayerModel model = _repository.GetPlayerById(id);
             return View(model);
         }
 
         public ActionResult Edit(int id)
         {
-            TeamModel model = _repository.GetTeamById(id);
+            PlayerModel model = _repository.GetPlayerById(id);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(TeamModel team)
+        public ActionResult Edit(PlayerModel player)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (team.AvatarImage != null && team.AvatarImage.ContentLength > 0)
+                    if (player.AvatarImage != null && player.AvatarImage.ContentLength > 0)
                     {
-                        var imageToDelete = team.Avatar;
-                        team.Avatar = String.Format("{0}_{1}", team.Id, Path.GetFileName(team.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
-                        team.AvatarImage.SaveAs(filepath);
+                        var imageToDelete = player.Avatar;
+                        player.Avatar = String.Format("{0}_{1}", player.Id, Path.GetFileName(player.AvatarImage.FileName));
+                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
+                        player.AvatarImage.SaveAs(filepath);
 
                         if (!String.IsNullOrEmpty(imageToDelete))
                         {
-                            filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), imageToDelete);
+                            filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), imageToDelete);
                             if (System.IO.File.Exists(filepath))
                             {
                                 System.IO.File.Delete(filepath);
                             }
                         }
                     }
-                    _repository.UpdateTeam(team);
+                    _repository.UpdatePlayer(player);
                     return RedirectToAction("Index");
                 }
             }
@@ -99,7 +100,7 @@ namespace TeamManager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            return View(team);
+            return View(player);
         }
 
         public ActionResult Delete(int id, bool? saveChangesError)
@@ -108,26 +109,25 @@ namespace TeamManager.Controllers
             {
                 ViewBag.ErrorMessage = "Unable to save changes. Try again, and if the problem persists see your system administrator.";
             }
-            TeamModel team = _repository.GetTeamById(id);
-            return View(team);
+            PlayerModel player = _repository.GetPlayerById(id);
+            return View(player);
         }
-        
+
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                TeamModel team = _repository.GetTeamById(id);
-                _repository.DeleteTeam(id);
-                if (!String.IsNullOrEmpty(team.Avatar))
+                PlayerModel player = _repository.GetPlayerById(id);
+                _repository.DeletePlayer(id);
+                if (!String.IsNullOrEmpty(player.Avatar))
                 {
-                    var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
+                    var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
                     if (System.IO.File.Exists(filepath))
                     {
                         System.IO.File.Delete(filepath);
                     }
                 }
-                
             }
             catch (DataException)
             {
