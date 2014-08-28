@@ -157,7 +157,6 @@
     <Content Include="Content\Avatars\Players\empty.png" />
     <Content Include="Content\Avatars\Teams\empty.png" />
     <Content Include="Content\site.css" />
-    <Content Include="Content\body.css" />
     <Content Include="Content\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />

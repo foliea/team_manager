@@ -17,7 +17,7 @@ namespace TeamManager.Models
         [Required]
         public string Name { get; set; }
 
-        [StringLength(100, ErrorMessage = "Image name cannot be longer than 100 characters.")]
+        [StringLength(100, ErrorMessage = "Image name too long.")]
         public string Avatar { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Win number must be a positive number.")]
