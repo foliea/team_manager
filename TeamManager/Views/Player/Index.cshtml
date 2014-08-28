@@ -2,8 +2,5 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@{Html.RenderPartial("_PlayerList", Model);}
+@{Html.RenderPartial("_Players", Model);}
+@Html.ActionLink("New", "Create", new {}, new { @class = "btn btn-primary" })

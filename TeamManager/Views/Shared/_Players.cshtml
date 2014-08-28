@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TeamManager.Models.PlayerModel>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Players</h3>
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Win)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loss)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tie)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Win)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loss)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tie)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Player", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "Details", "Player", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", "Player", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

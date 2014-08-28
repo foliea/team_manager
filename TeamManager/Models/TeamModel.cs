@@ -16,10 +16,10 @@ namespace TeamManager.Models
 
         [StringLength(100, ErrorMessage = "Image name cannot be longer than 100 characters.")]
         public string Avatar { get; set; }
+                
+        [ValidateImage(ErrorMessage = "Please select a PNG or JPEG image smaller than 1MB.")]
+        public HttpPostedFileBase AvatarImage { get; set; }
 
         public IEnumerable<PlayerModel> Players { get; set; }
-
-        [ValidateImage(ErrorMessage = "Please select a PNG or JPEG image smaller than 1MB")]
-        public HttpPostedFileBase AvatarImage { get; set; }
     }
 }

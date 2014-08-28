@@ -2,43 +2,15 @@
 @{
     ViewBag.Title = "Delete";
 }
-<h2>Delete</h2>
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>PlayerModel</legend>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Avatar)
-    </div>
-    <div class="display-field">
-        @if (String.IsNullOrEmpty(Model.Avatar))
-        {
-            <img src="@Url.Content("~/Content/Avatars/Players/empty.png")" alt="Image" />
-        }
-        else
-        {
-            <img src="@Url.Content(String.Format("~/Content/Avatars/Players/{0}", Model.Avatar))" alt="Image" />
-        }
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Win)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Loss)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Tie)
-    </div>
-</fieldset>
+
+<div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong> Are you sure you want to delete this player?
+</div>
+
+@{Html.RenderPartial("_Player", Model);}
+
 @using (Html.BeginForm())
 {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default" })
 }

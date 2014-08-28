@@ -2,45 +2,37 @@
 @{
     ViewBag.Title = "Edit";
 }
-<h2>Edit</h2>
-@using (Html.BeginForm("Edit", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>TeamModel</legend>
-        @Html.HiddenFor(model => model.Id)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Avatar)
-        </div>
-        <div class="display-field">
-            @if (String.IsNullOrEmpty(Model.Avatar))
-            {
-                <img src="@Url.Content("~/Content/Avatars/Teams/empty.png")" alt="Image" />
-            }
-            else
-            {
-                <img src="@Url.Content(String.Format("~/Content/Avatars/Teams/{0}", Model.Avatar))" alt="Image" />
-            }
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.AvatarImage, new { type = "file", accept = "image/*" })
-            @Html.ValidationMessageFor(model => model.AvatarImage)
-        </div>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Edit Team</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Edit", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+            <div class="editor-label top-buffer">
+                @Html.LabelFor(model => model.Avatar)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AvatarImage, new { type = "file", accept = "image/*" })
+                @Html.ValidationMessageFor(model => model.AvatarImage)
+            </div>
+            <div class="top-buffer">
+                <input type="submit" class="btn btn-success" value="Save" />
+                @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

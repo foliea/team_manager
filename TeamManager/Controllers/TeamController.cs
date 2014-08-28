@@ -17,8 +17,7 @@ namespace TeamManager.Controllers
         {
             _repository = repository;
         }
-        public TeamController()
-            : this(new TeamRepository())
+        public TeamController() : this(new TeamRepository())
         {
         }
 

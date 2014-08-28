@@ -1,0 +1,36 @@
+﻿@model TeamManager.Models.PlayerModel
+
+<div class="display-field">
+    @if (String.IsNullOrEmpty(Model.Avatar))
+    {
+        <img src="@Url.Content("~/Content/Avatars/Players/empty.png")" class="thumbnail" alt="Image" />
+    }
+    else
+    {
+        <img src="@Url.Content(String.Format("~/Content/Avatars/Players/{0}", Model.Avatar))" class="thumbnail" alt="Image" />
+    }
+</div>
+
+<ul class="list-group">
+    <li class="list-group-item text-muted">Player</li>
+    <li class="list-group-item text-right">
+        <span class="pull-left">
+            <strong>@Html.DisplayNameFor(model => model.Name)</strong>
+        </span>@Html.DisplayFor(model => model.Name)
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left">
+            <strong>@Html.DisplayNameFor(model => model.Win)</strong>
+        </span>@Html.DisplayFor(model => model.Win)
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left">
+            <strong>@Html.DisplayNameFor(model => model.Loss)</strong>
+        </span>@Html.DisplayFor(model => model.Loss)
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left">
+            <strong>@Html.DisplayNameFor(model => model.Tie)</strong>
+        </span>@Html.DisplayFor(model => model.Tie)
+    </li>
+</ul>

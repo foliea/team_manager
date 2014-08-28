@@ -1,3 +1,9 @@
+TeamManager/Content/Avatars/Teams/*
+TeamManager/Content/Avatars/Players/*
+
+!TeamManager/Content/Avatars/Teams/empty.png
+!TeamManager/Content/Avatars/Players/empty.png
+
 ###################
 # compiled source #
 ###################
