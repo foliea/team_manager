@@ -9,16 +9,16 @@ using TeamManager.Models;
 
 namespace TeamManager.Controllers
 {
-    public class PlayerController : Controller
+    public class PlayersController : Controller
     {
         private IPlayerRepository _repository;
 
-        public PlayerController(IPlayerRepository repository)
+        public PlayersController(IPlayerRepository repository)
         {
             _repository = repository;
         }
 
-        public PlayerController() : this(new PlayerRepository())
+        public PlayersController() : this(new PlayerRepository())
         {
         }
 

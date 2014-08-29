@@ -1,4 +1,14 @@
-﻿@model IEnumerable<TeamManager.Models.PlayerModel>
+﻿@model TeamManager.Models.SelectPlayerViewModel
+@{
+    ViewBag.Title = "Select Team";
+}
+
+@{Html.RenderPartial("_Team", Model.Team);}
+
+<div class="alert alert-warning" role="alert">
+    <strong>Warning:</strong> If you pick a player who has already a team, he will be removed from his previous team!
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Players</h3>
@@ -6,25 +16,25 @@
     <table class="table table-striped table-bordered">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th>
                 Team
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Win)
+                Win
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Loss)
+                Loss
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tie)
+                Tie
             </th>
             <th>
                 Actions
             </th>
         </tr>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Players)
         {
             <tr>
                 <td>
@@ -50,12 +60,11 @@
                     @Html.DisplayFor(modelItem => item.Tie)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Players", new { id = item.Id }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Details", "Details", "Players", new { id = item.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "Delete", "Players", new { id = item.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Add to a team", "SelectTeam", "PlayerToTeam", new { playerId = item.Id }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Add", "AddToTeam", new { playerId = item.Id, teamId = Model.Team.Id, redirectToPlayer = false }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }
     </table>
 </div>
+                    
+

@@ -130,15 +130,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\ValidateName.cs" />
     <Compile Include="Common\ValidateImage.cs" />
-    <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\PlayerToTeamController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IPlayerRepository.cs" />
     <Compile Include="Models\ITeamRepository.cs" />
     <Compile Include="Models\PlayerModel.cs" />
+    <Compile Include="Models\SelectPlayerViewModel.cs" />
+    <Compile Include="Models\SelectTeamViewModel.cs" />
     <Compile Include="Models\TeamManager.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -256,21 +260,22 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Team\Index.cshtml" />
-    <Content Include="Views\Team\Create.cshtml" />
-    <Content Include="Views\Team\Edit.cshtml" />
-    <Content Include="Views\Team\Details.cshtml" />
-    <Content Include="Views\Team\Delete.cshtml" />
-    <Content Include="Views\Player\Create.cshtml" />
-    <Content Include="Views\Player\Delete.cshtml" />
-    <Content Include="Views\Player\Details.cshtml" />
-    <Content Include="Views\Player\Edit.cshtml" />
-    <Content Include="Views\Player\Index.cshtml" />
-    <Content Include="Views\Shared\_validationSummary.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Players.cshtml" />
     <Content Include="Views\Shared\_Player.cshtml" />
     <Content Include="Views\Shared\_Team.cshtml" />
+    <Content Include="Views\PlayerToTeam\SelectTeam.cshtml" />
+    <Content Include="Views\PlayerToTeam\SelectPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

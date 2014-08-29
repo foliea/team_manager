@@ -1,0 +1,18 @@
+﻿@model TeamManager.Models.PlayerModel
+@{
+    ViewBag.Title = "Player Details";
+}
+
+@{Html.RenderPartial("_Player", Model);}
+
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
+@if (Model.Team == null)
+{
+    @Html.ActionLink("Add to a team", "SelectTeam", "PlayerToTeam", new { playerId = Model.Id }, new { @class = "btn btn-primary" })
+}
+else
+{
+    @Html.ActionLink("Remove from team", "Remove", "PlayerToTeam", new { playerId = Model.Id }, new { @class = "btn btn-danger" })
+}
+
+@Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default" })

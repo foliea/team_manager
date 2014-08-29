@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<TeamManager.Models.PlayerModel>
+@{
+    ViewBag.Title = "Players";
+}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Players</h3>
@@ -50,12 +53,13 @@
                     @Html.DisplayFor(modelItem => item.Tie)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Players", new { id = item.Id }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Details", "Details", "Players", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Edit", "Edit", "Players", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add to a team", "SelectTeam", "PlayerToTeam", new { playerId = item.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete", "Delete", "Players", new { id = item.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Add to a team", "SelectTeam", "PlayerToTeam", new { playerId = item.Id }, new { @class = "btn btn-default" })
                 </td>
             </tr>
         }
     </table>
 </div>
+@Html.ActionLink("New", "Create", new {}, new { @class = "btn btn-primary" })

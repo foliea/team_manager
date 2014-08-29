@@ -1,9 +1,0 @@
-﻿@model TeamManager.Models.PlayerModel
-@{
-    ViewBag.Title = "Details";
-}
-
-@{Html.RenderPartial("_Player", Model);}
-
-@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
-@Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-default" })

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<TeamManager.Models.TeamModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Teams";
 }
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,6 +10,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Players
             </th>
             <th>
                 Actions
@@ -22,8 +25,12 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @item.Players.Count()
+                </td>
+                <td>
                     @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add player", "SelectPlayer", "PlayerToTeam", new { teamId = item.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>

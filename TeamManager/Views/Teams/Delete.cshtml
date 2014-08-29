@@ -1,9 +1,9 @@
 ﻿@model TeamManager.Models.TeamModel
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Team";
 }
 <div class="alert alert-warning" role="alert">
-    <strong>Warning!</strong> Are you sure you want to delete this team?
+    <strong>Warning:</strong> Are you sure you want to delete this team? Players of this team will be automatically removed.
 </div>
 
 @{Html.RenderPartial("_Team", Model);}

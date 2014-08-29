@@ -25,23 +25,22 @@
                         </button>
                     </div>
 
-                    @Html.ActionLink("TeamManager", "Index", "Team", new { }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("TeamManager", "Index", "Teams", new { }, new { @class = "navbar-brand" })
 
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Teams", "Index", "Team")</li>
-                            <li>@Html.ActionLink("Players", "Index", "Player")</li>
+                            <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
+                            <li>@Html.ActionLink("Players", "Index", "Players")</li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>    
         <div class="container top-buffer">
-            @Html.Partial("_validationSummary")
             @RenderBody()   
             <hr>
             <footer>
-                <p>&copy; Adrien Folie @System.DateTime.Now.ToString("yyyy")</p>
+                <p>&copy; <a href="http://www.foliea.io">Adrien Folie</a> @System.DateTime.Now.ToString("yyyy")</p>
             </footer> 
         </div>
          @Scripts.Render("~/js")

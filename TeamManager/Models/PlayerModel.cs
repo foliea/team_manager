@@ -11,10 +11,11 @@ namespace TeamManager.Models
     public class PlayerModel
     {
         public int Id { get; set; }
-
+ 
         public int? TeamId { get; set; }
 
         [Required]
+        [ValidateName]
         public string Name { get; set; }
 
         [StringLength(100, ErrorMessage = "Image name too long.")]
@@ -31,5 +32,7 @@ namespace TeamManager.Models
 
         [ValidateImage(ErrorMessage = "Please select a PNG or JPEG image smaller than 1MB.")]
         public HttpPostedFileBase AvatarImage { get; set; }
+
+        public TeamModel Team { get; set; }
     }
 }

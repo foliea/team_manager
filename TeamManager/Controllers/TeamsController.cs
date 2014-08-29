@@ -9,15 +9,15 @@ using TeamManager.Models;
 
 namespace TeamManager.Controllers
 {
-    public class TeamController : Controller
+    public class TeamsController : Controller
     {
         private ITeamRepository _repository;
 
-        public TeamController(ITeamRepository repository)
+        public TeamsController(ITeamRepository repository)
         {
             _repository = repository;
         }
-        public TeamController() : this(new TeamRepository())
+        public TeamsController() : this(new TeamRepository())
         {
         }
 

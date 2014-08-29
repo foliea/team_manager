@@ -2,12 +2,12 @@
 
 <div class="display-field">
     @if (String.IsNullOrEmpty(Model.Avatar))
-    {
-        <img src="@Url.Content("~/Content/Avatars/Players/empty.png")" class="thumbnail" alt="Image" />
-    }
-    else
-    {
-        <img src="@Url.Content(String.Format("~/Content/Avatars/Players/{0}", Model.Avatar))" class="thumbnail" alt="Image" />
+{
+    <img src="@Url.Content("~/Content/Avatars/Players/empty.png")" class="thumbnail  avatar" alt="Image" />
+}
+else
+{
+        <img src="@Url.Content(String.Format("~/Content/Avatars/Players/{0}", Model.Avatar))" class="thumbnail  avatar" alt="Image" />
     }
 </div>
 
@@ -17,6 +17,19 @@
         <span class="pull-left">
             <strong>@Html.DisplayNameFor(model => model.Name)</strong>
         </span>@Html.DisplayFor(model => model.Name)
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left">
+            <strong>Team</strong>
+        </span>
+        @if (Model.Team != null) 
+        { 
+            @Html.DisplayFor(model => model.Team.Name) 
+        }
+        else
+        {   
+            <span>-</span>
+        }
     </li>
     <li class="list-group-item text-right">
         <span class="pull-left">

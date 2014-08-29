@@ -1,6 +1,0 @@
-﻿@model IEnumerable<TeamManager.Models.PlayerModel>
-@{
-    ViewBag.Title = "Index";
-}
-@{Html.RenderPartial("_Players", Model);}
-@Html.ActionLink("New", "Create", new {}, new { @class = "btn btn-primary" })

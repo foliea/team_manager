@@ -1,13 +1,13 @@
 ﻿@model TeamManager.Models.PlayerModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Player";
 }
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Edit Player</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Edit", "Player", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Edit", "Players", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
             <div class="editor-label">
