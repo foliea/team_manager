@@ -80,7 +80,6 @@ namespace TeamManager.Repositories
                 else
                     playerData = new Player();
                 playerData.Name = player.Name;
-                playerData.Avatar = player.Avatar;
                 playerData.Win = player.Win;
                 playerData.Loss = player.Loss;
                 playerData.Tie = player.Tie;
@@ -88,6 +87,8 @@ namespace TeamManager.Repositories
                     playerData.TeamId = player.Team.Id;
                 else
                     playerData.TeamId = null;
+                if (!String.IsNullOrEmpty(player.Avatar))
+                    playerData.Avatar = player.Avatar;
                 if (!update)
                     dataContext.Player.InsertOnSubmit(playerData);
                 dataContext.SubmitChanges();

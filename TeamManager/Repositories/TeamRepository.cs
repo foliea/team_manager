@@ -73,8 +73,8 @@ namespace TeamManager.Repositories
                 else
                     teamData = new Team();
                 teamData.Name = team.Name;
-                teamData.Avatar = team.Avatar;
-
+                if (!String.IsNullOrEmpty(team.Avatar))
+                    teamData.Avatar = team.Avatar;
                 if (!update)
                     dataContext.Team.InsertOnSubmit(teamData);
                 dataContext.SubmitChanges();

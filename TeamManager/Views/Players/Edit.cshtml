@@ -10,6 +10,9 @@
         @using (Html.BeginForm("Edit", "Players", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
+            
+            @Helpers.DisplayAvatar(Model.Avatar, "Players", Model.Name)
+            
             <div>
                 @Html.LabelFor(model => model.Name)
             </div>

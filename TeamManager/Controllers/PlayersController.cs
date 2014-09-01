@@ -80,7 +80,7 @@ namespace TeamManager.Controllers
                     _repository.UpdatePlayer(player);
                     if (!String.IsNullOrEmpty(newAvatar))
                         ImagesHandler.Delete(getAvatarsPath(), avatarToDelete);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { id = player.Id });
                 }
             }
             catch (DataException)
