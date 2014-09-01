@@ -14,7 +14,7 @@
         <elementListCompartment Id="8578f0b5-bae0-4df8-9105-b49d6f27e0e6" absoluteBounds="5.515, 2.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.75 : 2.50564697265625); (5.5 : 2.50564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.75 : 2.50564697265625); (5.5 : 2.50564697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TeamManagerDataContext/Team/Team_Player" />
       <nodes>
         <classShapeMoniker Id="7b3cb6f9-f59d-47a5-aa0d-86ebf4f4be99" />

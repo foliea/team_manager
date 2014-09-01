@@ -10,17 +10,17 @@
         @using (Html.BeginForm("Create", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
-            <div class="editor-label">
+            <div>
                 @Html.LabelFor(model => model.Name)
             </div>
-            <div class="editor-field">
+            <div>
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
-            <div class="editor-label top-buffer">
+            <div class="top-buffer">
                 @Html.LabelFor(model => model.Avatar)
             </div>
-            <div class="editor-field">
+            <div>
                 @Html.TextBoxFor(model => model.AvatarImage, new { type = "file", accept = "image/*" })
                 @Html.ValidationMessageFor(model => model.AvatarImage)
             </div>

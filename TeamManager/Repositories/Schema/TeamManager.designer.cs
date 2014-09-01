@@ -39,7 +39,7 @@ namespace TeamManager.Repositories.Schema
     #endregion
 		
 		public TeamManagerDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TeamManagerConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TeamManager"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
