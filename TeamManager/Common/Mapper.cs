@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TeamManager.Repositories.Schema;
 using TeamManager.Models;
 
@@ -15,7 +14,7 @@ namespace TeamManager.Common
             var model = new PlayerModel()
             {
                 Id = player.Id,
-                TeamId = player.TeamId,
+                TeamId = player.Id,
                 Name = player.Name,
                 Avatar = player.Avatar,
                 Win = player.Win,

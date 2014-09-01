@@ -43,6 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Tie)
                 </td>
                 <td>
+                    @Html.ActionLink("Details", "Details", "Players", new { id = item.Id }, new { @class = "btn btn-info" })
                     @Html.ActionLink("Remove", "Remove", "PlayerToTeam", new { playerId = item.Id, teamId = Model.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>

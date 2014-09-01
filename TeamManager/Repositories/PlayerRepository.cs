@@ -86,6 +86,8 @@ namespace TeamManager.Repositories
                 playerData.Tie = player.Tie;
                 if (player.Team != null)
                     playerData.TeamId = player.Team.Id;
+                else
+                    playerData.TeamId = null;
                 if (!update)
                     dataContext.Player.InsertOnSubmit(playerData);
                 dataContext.SubmitChanges();

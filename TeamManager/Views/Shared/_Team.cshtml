@@ -1,15 +1,6 @@
 ﻿@model TeamManager.Models.TeamModel
 
-<div class="display-field">
-    @if (String.IsNullOrEmpty(Model.Avatar))
-    {
-        <img src="@Url.Content("~/Content/Avatars/Teams/empty.png")" class="thumbnail avatar" alt="Image" />
-    }
-    else
-    {
-        <img src="@Url.Content(String.Format("~/Content/Avatars/Teams/{0}", Model.Avatar))" class="thumbnail avatar" alt="Image" />
-    }
-</div>
+@Helpers.DisplayAvatar(Model.Avatar, "Teams", Model.Name)
 
 <ul class="list-group">
     <li class="list-group-item text-muted">Team</li>

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamManager.Repositories;
 using TeamManager.Models;
+using TeamManager.Common;
 
 namespace TeamManager.Controllers
 {
@@ -40,11 +41,7 @@ namespace TeamManager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (team.AvatarImage != null && team.AvatarImage.ContentLength > 0) {
-                        team.Avatar = String.Format("{0}_{1}", team.Id, Path.GetFileName(team.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
-                        team.AvatarImage.SaveAs(filepath);
-                    }
+                    team.Avatar = ImagesHandler.Upload(team.AvatarImage, getAvatarsPath(), team.Id.ToString());
                     _repository.InsertTeam(team);
                     return RedirectToAction("Index");
                 }
@@ -75,23 +72,13 @@ namespace TeamManager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (team.AvatarImage != null && team.AvatarImage.ContentLength > 0)
-                    {
-                        var imageToDelete = team.Avatar;
-                        team.Avatar = String.Format("{0}_{1}", team.Id, Path.GetFileName(team.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
-                        team.AvatarImage.SaveAs(filepath);
-
-                        if (!String.IsNullOrEmpty(imageToDelete))
-                        {
-                            filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), imageToDelete);
-                            if (System.IO.File.Exists(filepath))
-                            {
-                                System.IO.File.Delete(filepath);
-                            }
-                        }
-                    }
+                    var newAvatar = ImagesHandler.Upload(team.AvatarImage, getAvatarsPath(), team.Id.ToString());
+                    var avatarToDelete = team.Avatar;
+                    if (!String.IsNullOrEmpty(newAvatar))
+                        team.Avatar = newAvatar;
                     _repository.UpdateTeam(team);
+                    if (!String.IsNullOrEmpty(newAvatar))
+                        ImagesHandler.Delete(getAvatarsPath(), avatarToDelete);
                     return RedirectToAction("Index");
                 }
             }
@@ -111,7 +98,7 @@ namespace TeamManager.Controllers
             TeamModel team = _repository.GetTeamById(id);
             return View(team);
         }
-        
+
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -119,15 +106,7 @@ namespace TeamManager.Controllers
             {
                 TeamModel team = _repository.GetTeamById(id);
                 _repository.DeleteTeam(id);
-                if (!String.IsNullOrEmpty(team.Avatar))
-                {
-                    var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Teams"), team.Avatar);
-                    if (System.IO.File.Exists(filepath))
-                    {
-                        System.IO.File.Delete(filepath);
-                    }
-                }
-                
+                ImagesHandler.Delete(getAvatarsPath(), team.Avatar);
             }
             catch (DataException)
             {
@@ -135,8 +114,13 @@ namespace TeamManager.Controllers
                 new System.Web.Routing.RouteValueDictionary { 
                     { "id", id }, 
                     { "saveChangesError", true } });
-                }
+            }
             return RedirectToAction("Index");
+        }
+
+        private string getAvatarsPath()
+        {
+            return Server.MapPath("~/Content/Avatars/Teams");
         }
     }
 }

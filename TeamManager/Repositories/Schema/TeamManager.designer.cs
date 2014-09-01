@@ -30,12 +30,12 @@ namespace TeamManager.Repositories.Schema
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnCreated();
-    partial void InsertPlayer(Player instance);
-    partial void UpdatePlayer(Player instance);
-    partial void DeletePlayer(Player instance);
     partial void InsertTeam(Team instance);
     partial void UpdateTeam(Team instance);
     partial void DeleteTeam(Team instance);
+    partial void InsertPlayer(Player instance);
+    partial void UpdatePlayer(Player instance);
+    partial void DeletePlayer(Player instance);
     #endregion
 		
 		public TeamManagerDataContext() : 
@@ -68,6 +68,14 @@ namespace TeamManager.Repositories.Schema
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Team> Team
+		{
+			get
+			{
+				return this.GetTable<Team>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Player> Player
 		{
 			get
@@ -75,13 +83,143 @@ namespace TeamManager.Repositories.Schema
 				return this.GetTable<Player>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Team")]
+	public partial class Team : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<Team> Team
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Avatar;
+		
+		private EntitySet<Player> _Player;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnAvatarChanging(string value);
+    partial void OnAvatarChanged();
+    #endregion
+		
+		public Team()
+		{
+			this._Player = new EntitySet<Player>(new Action<Player>(this.attach_Player), new Action<Player>(this.detach_Player));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this.GetTable<Team>();
+				return this._Id;
 			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(32) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="NVarChar(128)")]
+		public string Avatar
+		{
+			get
+			{
+				return this._Avatar;
+			}
+			set
+			{
+				if ((this._Avatar != value))
+				{
+					this.OnAvatarChanging(value);
+					this.SendPropertyChanging();
+					this._Avatar = value;
+					this.SendPropertyChanged("Avatar");
+					this.OnAvatarChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_Player", Storage="_Player", ThisKey="Id", OtherKey="TeamId")]
+		public EntitySet<Player> Player
+		{
+			get
+			{
+				return this._Player;
+			}
+			set
+			{
+				this._Player.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Player(Player entity)
+		{
+			this.SendPropertyChanging();
+			entity.Team = this;
+		}
+		
+		private void detach_Player(Player entity)
+		{
+			this.SendPropertyChanging();
+			entity.Team = null;
 		}
 	}
 	
@@ -329,144 +467,6 @@ namespace TeamManager.Repositories.Schema
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Team")]
-	public partial class Team : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _Avatar;
-		
-		private EntitySet<Player> _Player;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnAvatarChanging(string value);
-    partial void OnAvatarChanged();
-    #endregion
-		
-		public Team()
-		{
-			this._Player = new EntitySet<Player>(new Action<Player>(this.attach_Player), new Action<Player>(this.detach_Player));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(32) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="NVarChar(128)")]
-		public string Avatar
-		{
-			get
-			{
-				return this._Avatar;
-			}
-			set
-			{
-				if ((this._Avatar != value))
-				{
-					this.OnAvatarChanging(value);
-					this.SendPropertyChanging();
-					this._Avatar = value;
-					this.SendPropertyChanged("Avatar");
-					this.OnAvatarChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_Player", Storage="_Player", ThisKey="Id", OtherKey="TeamId")]
-		public EntitySet<Player> Player
-		{
-			get
-			{
-				return this._Player;
-			}
-			set
-			{
-				this._Player.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Player(Player entity)
-		{
-			this.SendPropertyChanging();
-			entity.Team = this;
-		}
-		
-		private void detach_Player(Player entity)
-		{
-			this.SendPropertyChanging();
-			entity.Team = null;
 		}
 	}
 }

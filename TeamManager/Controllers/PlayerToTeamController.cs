@@ -40,11 +40,12 @@ namespace TeamManager.Controllers
 
         public ActionResult AddToTeam(int playerId, int teamId, bool redirectToPlayer)
         {
-            var player = _playersRepository.GetPlayerById(playerId);
-            
-            player.TeamId = teamId;
             try
             {
+                var player = _playersRepository.GetPlayerById(playerId);
+                var team = _teamsRepository.GetTeamById(teamId);
+
+                player.Team = team;
                 _playersRepository.UpdatePlayer(player);
                 if (redirectToPlayer)
                     return RedirectToAction("Details", "Players", new { id = playerId });
@@ -61,7 +62,7 @@ namespace TeamManager.Controllers
         {
             var player = _playersRepository.GetPlayerById(playerId);
 
-            player.TeamId = null;
+            player.Team = null;
             try
             {
                 _playersRepository.UpdatePlayer(player);

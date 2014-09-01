@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamManager.Repositories;
 using TeamManager.Models;
+using TeamManager.Common;
 
 namespace TeamManager.Controllers
 {
@@ -41,12 +42,7 @@ namespace TeamManager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (player.AvatarImage != null && player.AvatarImage.ContentLength > 0)
-                    {
-                        player.Avatar = String.Format("{0}_{1}", player.Id, Path.GetFileName(player.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
-                        player.AvatarImage.SaveAs(filepath);
-                    }
+                    player.Avatar = ImagesHandler.Upload(player.AvatarImage, getAvatarsPath(), player.Id.ToString());
                     _repository.InsertPlayer(player);
                     return RedirectToAction("Index");
                 }
@@ -77,23 +73,13 @@ namespace TeamManager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (player.AvatarImage != null && player.AvatarImage.ContentLength > 0)
-                    {
-                        var imageToDelete = player.Avatar;
-                        player.Avatar = String.Format("{0}_{1}", player.Id, Path.GetFileName(player.AvatarImage.FileName));
-                        var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
-                        player.AvatarImage.SaveAs(filepath);
-
-                        if (!String.IsNullOrEmpty(imageToDelete))
-                        {
-                            filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), imageToDelete);
-                            if (System.IO.File.Exists(filepath))
-                            {
-                                System.IO.File.Delete(filepath);
-                            }
-                        }
-                    }
+                    var newAvatar = ImagesHandler.Upload(player.AvatarImage, getAvatarsPath(), player.Id.ToString());
+                    var avatarToDelete = player.Avatar;
+                    if (!String.IsNullOrEmpty(newAvatar))                        
+                        player.Avatar = newAvatar;
                     _repository.UpdatePlayer(player);
+                    if (!String.IsNullOrEmpty(newAvatar))
+                        ImagesHandler.Delete(getAvatarsPath(), avatarToDelete);
                     return RedirectToAction("Index");
                 }
             }
@@ -121,14 +107,7 @@ namespace TeamManager.Controllers
             {
                 PlayerModel player = _repository.GetPlayerById(id);
                 _repository.DeletePlayer(id);
-                if (!String.IsNullOrEmpty(player.Avatar))
-                {
-                    var filepath = Path.Combine(Server.MapPath("~/Content/Avatars/Players"), player.Avatar);
-                    if (System.IO.File.Exists(filepath))
-                    {
-                        System.IO.File.Delete(filepath);
-                    }
-                }
+                ImagesHandler.Delete(getAvatarsPath(), player.Avatar);
             }
             catch (DataException)
             {
@@ -138,6 +117,11 @@ namespace TeamManager.Controllers
                     { "saveChangesError", true } });
                 }
             return RedirectToAction("Index");
+        }
+
+        private string getAvatarsPath()
+        {
+            return Server.MapPath("~/Content/Avatars/Players");
         }
     }
 }

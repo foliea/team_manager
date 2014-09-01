@@ -1,0 +1,9 @@
+﻿@helper DisplayAvatar(string name, string entity, string alt) {
+    
+        name = String.IsNullOrEmpty(name) ? "empty.png" : name;
+    var path = String.Format("~/Content/Avatars/{0}/{1}", entity, name);
+
+    path = VirtualPathUtility.ToAbsolute(path);
+
+    <img src="@path" class="thumbnail avatar" alt="@alt" />
+}

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\ImagesHandler.cs" />
     <Compile Include="Common\Mapper.cs" />
     <Compile Include="Common\ValidateName.cs" />
     <Compile Include="Common\ValidateImage.cs" />
@@ -144,18 +145,19 @@
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\SelectPlayerModel.cs" />
     <Compile Include="Models\SelectTeamModel.cs" />
+    <Compile Include="Models\TeamModel.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Repositories\Schema\TeamManager.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TeamManager.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\TeamModel.cs" />
-    <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\TeamManager.mdf" />
+    <Content Include="App_Data\TeamManager.sql" />
     <Content Include="App_Data\TeamManager_log.ldf">
       <DependentUpon>TeamManager.mdf</DependentUpon>
     </Content>
@@ -224,14 +226,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="App_Code\Helpers.cshtml" />
     <Content Include="Repositories\Schema\TeamManager.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>TeamManager.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\html5shiv.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -283,7 +286,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Repositories\Schema\TeamManager.dbml.layout">
       <DependentUpon>TeamManager.dbml</DependentUpon>
