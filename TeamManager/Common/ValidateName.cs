@@ -14,7 +14,7 @@ namespace TeamManager.Common
         {
             var name = value as string;
             if (String.IsNullOrEmpty(name)) return null;
-            if (name == "-") return new ValidationResult("- Is not a valid name.");
+            if (name == "-") return new ValidationResult("- is not a valid name.");
             return ValidationResult.Success;
         }
     }

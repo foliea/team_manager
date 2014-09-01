@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamManager.Repositories;
 using TeamManager.Models;
 
 namespace TeamManager.Controllers
@@ -27,14 +28,14 @@ namespace TeamManager.Controllers
         {
             var player = _playersRepository.GetPlayerById(playerId);
             var teams = _teamsRepository.GetTeams();
-            return View(new SelectTeamViewModel() { Player = player, Teams = teams });
+            return View(new SelectTeamModel() { Player = player, Teams = teams });
         }
 
         public ActionResult SelectPlayer(int teamId)
         {
-            var players = _playersRepository.GetPlayers();
             var team = _teamsRepository.GetTeamById(teamId);
-            return View(new SelectPlayerViewModel() { Team = team, Players = players });
+            var players = _playersRepository.GetPlayers();
+            return View(new SelectPlayerModel() { Team = team, Players = players });
         }
 
         public ActionResult AddToTeam(int playerId, int teamId, bool redirectToPlayer)

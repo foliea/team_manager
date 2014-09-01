@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TeamManager.Common;
+using TeamManager.Repositories.Schema;
+using TeamManager.Models;
 
-namespace TeamManager.Models
+namespace TeamManager.Repositories
 {
     public class PlayerRepository : IPlayerRepository
     {
@@ -20,19 +23,7 @@ namespace TeamManager.Models
                             select player;
                 var players = query.ToList();
                 foreach (var playerData in players)
-                {
-                    playerList.Add(new PlayerModel()
-                    {
-                        Id = playerData.Id,
-                        TeamId = playerData.TeamId,
-                        Name = playerData.Name,
-                        Avatar = playerData.Avatar,
-                        Win = playerData.Win,
-                        Loss = playerData.Loss,
-                        Tie = playerData.Tie,
-                        Team = getTeamModel(playerData.Team)
-                    });
-                }
+                    playerList.Add(Mapper.ToPlayerModel(playerData));
             }
             return playerList;
         }
@@ -44,18 +35,7 @@ namespace TeamManager.Models
                             where p.Id == playerId
                             select p;
                 var player = query.FirstOrDefault();
-                var model = new PlayerModel()
-                {
-                    Id = playerId,
-                    TeamId = player.TeamId,
-                    Name = player.Name,
-                    Avatar = player.Avatar,
-                    Win = player.Win,
-                    Loss = player.Loss,
-                    Tie = player.Tie,
-                    Team = getTeamModel(player.Team)
-                };
-                return model;
+                return Mapper.ToPlayerModel(player);
             }
         }
 
@@ -72,20 +52,7 @@ namespace TeamManager.Models
         
         public void InsertPlayer(PlayerModel player)
         {
-            using (var dataContext = new TeamManagerDataContext())
-            {
-                var playerData = new Player()
-                {
-                    TeamId = player.TeamId,
-                    Name = player.Name,
-                    Avatar = player.Avatar,
-                    Win = player.Win,
-                    Loss = player.Loss,
-                    Tie = player.Tie
-                };
-                dataContext.Player.InsertOnSubmit(playerData);
-                dataContext.SubmitChanges();
-            }
+            insertOrUpdate(player, update: false);
         }
 
         public void DeletePlayer(int playerId)
@@ -100,15 +67,27 @@ namespace TeamManager.Models
 
         public void UpdatePlayer(PlayerModel player)
         {
+            insertOrUpdate(player, update: true);
+        }
+
+        private void insertOrUpdate(PlayerModel player, bool update)
+        {
             using (var dataContext = new TeamManagerDataContext())
             {
-                Player playerData = dataContext.Player.Where(p => p.Id == player.Id).SingleOrDefault();
-                playerData.TeamId = player.TeamId;
+                Player playerData;
+                if (update)
+                    playerData = dataContext.Player.Where(t => t.Id == player.Id).SingleOrDefault();
+                else
+                    playerData = new Player();
                 playerData.Name = player.Name;
                 playerData.Avatar = player.Avatar;
                 playerData.Win = player.Win;
                 playerData.Loss = player.Loss;
                 playerData.Tie = player.Tie;
+                if (player.Team != null)
+                    playerData.TeamId = player.Team.Id;
+                if (!update)
+                    dataContext.Player.InsertOnSubmit(playerData);
                 dataContext.SubmitChanges();
             }
         }

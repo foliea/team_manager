@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Mapper.cs" />
     <Compile Include="Common\ValidateName.cs" />
     <Compile Include="Common\ValidateImage.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -138,19 +139,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IPlayerRepository.cs" />
-    <Compile Include="Models\ITeamRepository.cs" />
+    <Compile Include="Repositories\IPlayerRepository.cs" />
+    <Compile Include="Repositories\ITeamRepository.cs" />
     <Compile Include="Models\PlayerModel.cs" />
-    <Compile Include="Models\SelectPlayerViewModel.cs" />
-    <Compile Include="Models\SelectTeamViewModel.cs" />
-    <Compile Include="Models\TeamManager.designer.cs">
+    <Compile Include="Models\SelectPlayerModel.cs" />
+    <Compile Include="Models\SelectTeamModel.cs" />
+    <Compile Include="Repositories\Schema\TeamManager.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TeamManager.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\TeamModel.cs" />
-    <Compile Include="Models\PlayerRepository.cs" />
-    <Compile Include="Models\TeamRepository.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
+    <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,7 +224,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Models\TeamManager.dbml">
+    <Content Include="Repositories\Schema\TeamManager.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>TeamManager.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -271,7 +272,6 @@
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Players.cshtml" />
     <Content Include="Views\Shared\_Player.cshtml" />
     <Content Include="Views\Shared\_Team.cshtml" />
     <Content Include="Views\PlayerToTeam\SelectTeam.cshtml" />
@@ -285,7 +285,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Models\TeamManager.dbml.layout">
+    <None Include="Repositories\Schema\TeamManager.dbml.layout">
       <DependentUpon>TeamManager.dbml</DependentUpon>
     </None>
   </ItemGroup>

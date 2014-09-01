@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TeamManager.Models
 {
-    public class SelectPlayerViewModel
+    public class SelectPlayerModel
     {
         public TeamModel Team { get; set; }
         public IEnumerable<PlayerModel> Players { get; set; }

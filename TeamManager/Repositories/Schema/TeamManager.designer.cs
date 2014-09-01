@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TeamManager.Models
+namespace TeamManager.Repositories.Schema
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
