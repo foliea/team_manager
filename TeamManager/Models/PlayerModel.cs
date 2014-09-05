@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TeamManager.Common;
 using System.Web.DynamicData;
 using System.ComponentModel.DataAnnotations;
+using TeamManager.Common;
 
 namespace TeamManager.Models
 {
