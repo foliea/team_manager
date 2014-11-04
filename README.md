@@ -8,6 +8,6 @@ management interface to add, update, and remove players and teams.
 A local database file is included in `App_Data`.
 
 ## Run
-Open the solution with `Visual Studio` (2012 and above).
+Open the solution with [Visual Studio 2012+](http://www.visualstudio.com/).
 
 Hit `F5`.
